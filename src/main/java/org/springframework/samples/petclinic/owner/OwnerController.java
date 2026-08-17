@@ -58,7 +58,7 @@ class OwnerController {
 
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setDisallowedFields("id");
+		dataBinder.setDisallowedFields("id", "*.id");
 	}
 
 	@ModelAttribute("owner")
@@ -98,6 +98,9 @@ class OwnerController {
 		String lastName = owner.getLastName();
 		if (lastName == null) {
 			lastName = ""; // empty string signifies broadest possible search
+		}
+		else {
+			lastName = lastName.strip();
 		}
 
 		// find owners by last name
